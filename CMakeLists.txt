@@ -17,6 +17,8 @@ set(PROJECT_SOURCES
         src/mainwindow.cpp
         src/mainwindow.h
         src/mainwindow.ui
+        src/mpd_connection.cpp
+        src/config.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
