@@ -1,9 +1,9 @@
-#include <mpd/client.h>
+#include "mpd/client.h"
 #include <cstdio>
 #include <iostream>
-#include <mpd/connection.h>
-#include <mpd/error.h>
-#include <mpd/player.h>
+#include "mpd/connection.h"
+#include "mpd/error.h"
+#include "mpd/player.h"
 #include <ostream>
 
 using namespace std;
@@ -34,7 +34,7 @@ class MPD_Connection {
  * @param mpd_connection within object
  * @return true if error, false otherwise
  */
-bool MPD_Connection::check_error() {
+inline bool MPD_Connection::check_error() {
     if (conn == NULL) {
         cerr << "Out of memory" << endl;
         conn_state = disconnected;
@@ -48,7 +48,7 @@ bool MPD_Connection::check_error() {
     return false;
 }
 
-void MPD_Connection::play_next() {
+inline void MPD_Connection::play_next() {
     check_error();
     mpd_run_next(conn);
 }
