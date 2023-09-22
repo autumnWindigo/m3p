@@ -18,6 +18,7 @@ set(PROJECT_SOURCES
         src/mainwindow.h
         src/mainwindow.ui
         src/mpd_connection.cpp
+        src/mpd_connection.h
         src/config.cpp
 )
 
@@ -44,7 +45,7 @@ else()
     endif()
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(m3p PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/mpd ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(m3p PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
