@@ -45,8 +45,9 @@ else()
     endif()
 endif()
 
-target_include_directories(m3p PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/mpd ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(m3p PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(m3p PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(m3p PRIVATE ${CMAKE_SOURCE_DIR}/lib/libmpdclient.so.2.21)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

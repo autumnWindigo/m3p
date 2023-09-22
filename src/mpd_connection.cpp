@@ -8,7 +8,7 @@ namespace MPD {
 Connection::Connection() : connection(nullptr),
                                 port(0){}
 
-inline bool Connection::check_error()
+bool Connection::check_error()
 {
     if (connection == NULL) {
         cerr << "Out of memory" << endl;
@@ -21,19 +21,19 @@ inline bool Connection::check_error()
     return false;
 }
 
-inline void Connection::play_next()
+void Connection::play_next()
 {
     check_error();
     mpd_run_next(connection);
     mpd_status_begin();
 }
 
-inline void Connection::close_connection()
+void Connection::close_connection()
 {
 
 }
 
-inline void Connection::connect()
+void Connection::connect()
 {
     connection = mpd_connection_new(NULL, 0, 0);
 }
