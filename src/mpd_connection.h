@@ -34,6 +34,14 @@ public:
     /* Connects client to mpd server */
     void connect();
 
+    /* Set volume 0-100 */
+    void set_volume(int);
+
+    /* Returns Volume 0-100, -1 if error */
+    int get_volume();
+
+    mpd_connection *get();
+
 private:
     mpd_connection *connection;
     int port;
