@@ -17,6 +17,13 @@ public:
 
     Connection();
 
+    /* Creates an instance of Connection to use in Qt */
+    static Connection* instance()
+    {
+        static Connection con;
+        return &con;
+    }
+
     /* Plays next song in que */
     void play_next();
 
@@ -32,7 +39,7 @@ public:
     void close_connection();
 
     /* Connects client to mpd server */
-    void connect();
+    mpd_connection* connect();
 
     /* Set volume 0-100 */
     void set_volume(int);
