@@ -29,8 +29,10 @@ std::string Song::get_artist() {
 
 }
 
-// TODO
-bool is_safe() {
+// Probably make better
+bool Song::is_safe() {
+    if ( song == NULL )
+        return false;
     return true;
 }
 
