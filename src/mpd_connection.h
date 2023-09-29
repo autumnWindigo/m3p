@@ -1,6 +1,7 @@
 #ifndef MPD_CONNECTION_
 #define MPD_CONNECTION_
 
+#include "mpd/song.h"
 #include <mpd/client.h>
 #include <mpd/connection.h>
 #include <mpd/error.h>
@@ -12,12 +13,15 @@
 // TODO Put documentation for mpd_connection here
 namespace MPD {
 
+// Responsible for handling mpd connection
 struct Connection {
 public:
 
     Connection();
 
-    /* Creates an instance of Connection to use in Qt */
+    ~Connection();
+
+    /* Creates an instance of Connection to use */
     static Connection* instance()
     {
         static Connection con;
@@ -47,7 +51,8 @@ public:
     /* Returns Volume 0-100, -1 if error */
     int get_volume();
 
-    mpd_connection *get();
+    /* Returns connection */
+    mpd_connection *get() { return connection; }
 
 private:
     mpd_connection *connection;

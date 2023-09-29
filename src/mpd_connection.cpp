@@ -1,4 +1,5 @@
 #include "mpd_connection.h"
+#include "mpd/connection.h"
 
 using namespace std;
 
@@ -7,6 +8,10 @@ namespace MPD {
 // Make more clear when we add config support
 Connection::Connection() : connection(connect()),
                                 port(0){}
+
+Connection::~Connection() {
+    mpd_connection_free(connection);
+}
 
 bool Connection::check_error()
 {

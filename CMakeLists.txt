@@ -20,6 +20,10 @@ set(PROJECT_SOURCES
         src/mpd_connection.cpp
         src/mpd_connection.h
         src/config.cpp
+        src/library.h
+        src/library.cpp
+        src/song.h
+        src/song.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
