@@ -8,28 +8,33 @@ Song::Song() : song(mpd_recv_song(MPD::Connection::instance()->get())),
                 idx(0) {}
 
 Song::~Song() {
-    assert(song);
     mpd_song_free(song);
 }
 
 std::string Song::get_date() {
-    // Find a better solution, might be NULL
-    assert(song);
+    if (is_safe()) return nullptr;
     return mpd_song_get_tag(song, MPD_TAG_DATE, idx);
 }
 
 std::string Song::get_title() {
+    if (is_safe()) return nullptr;
     assert(song);
     return mpd_song_get_tag(song, MPD_TAG_TITLE, idx);
 }
 
 std::string Song::get_artist() {
+    if (is_safe()) return nullptr;
     assert(song);
     return mpd_song_get_tag(song, MPD_TAG_ARTIST, idx);
-
 }
 
-// Probably make better
+// Returns -1 if null or error
+int Song::get_length() {
+    if (is_safe()) return -1;
+    return mpd_song_get_duration(song);
+}
+
+// Probably make better, might be error not just null
 bool Song::is_safe() {
     if ( song == NULL )
         return false;

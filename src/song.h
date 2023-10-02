@@ -20,6 +20,7 @@ public:
     std::string get_date();
     std::string get_title();
     std::string get_artist();
+    int get_length();
 
     // Don't know if necessary yet
     mpd_song *get(){ return song; };
