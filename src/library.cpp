@@ -25,20 +25,27 @@ void Library::load_library() {
     prep_library();
     MPD::Song *song = nullptr;
 
+    // TODO Check if playlist = NULL ever (that means heap failed return -1);
     while ((song = new MPD::Song)->is_safe() != false) {
         song_count++;
         playlist = (MPD::Song*) realloc(playlist, song_count * sizeof(*playlist));
+        if (playlist == NULL)
+            // Heap failed, exit program, not just return
+            return;
         playlist[song_count - 1] = *song;
     }
+    // Sort based on default_sort in config
 }
 
 mpd_song *Library::find_song() {
 // TODO Return song based on title
+// Must be sorted first
     return nullptr;
 }
 
 void Library::sort(mpd_tag_type tag) {
 // TODO Sort based on input tag
+
 }
 
 int Library::get_song_count() {
