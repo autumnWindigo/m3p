@@ -1,6 +1,7 @@
 #ifndef MPD_LIBRARY_
 #define MPD_LIBRARY_
 #include "song.h"
+#include <functional>
 #include <mpd/client.h>
 
 namespace MPD {
@@ -23,7 +24,11 @@ public:
     // returns playlist
     MPD::Song *get();
 
-    void sort(mpd_tag_type);
+    void sort_by_date();
+    void sort_by_title();
+    void print();
+    void sort(std::function<std::string(MPD::Song)>);
+    void sort_temp(mpd_tag_type);
 
 private:
     void prep_library();
@@ -32,6 +37,8 @@ private:
 
     // acts as upper bound for playlist array
     int song_count;
+
+    mpd_tag_type current_sort;
 };
 }
 

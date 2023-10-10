@@ -12,20 +12,19 @@ Song::~Song() {
 }
 
 std::string Song::get_date() {
-    if (is_safe()) return nullptr;
-    return mpd_song_get_tag(song, MPD_TAG_DATE, idx);
+    // TODO VV Fix these it crashes program
+    //if (is_safe()) return NULL;
+    return get_tag(MPD_TAG_DATE);
 }
 
 std::string Song::get_title() {
-    if (is_safe()) return nullptr;
-    assert(song);
-    return mpd_song_get_tag(song, MPD_TAG_TITLE, idx);
+    //if (is_safe()) return NULL;
+    return get_tag(MPD_TAG_TITLE);
 }
 
 std::string Song::get_artist() {
-    if (is_safe()) return nullptr;
-    assert(song);
-    return mpd_song_get_tag(song, MPD_TAG_ARTIST, idx);
+    //if (is_safe()) return NULL;
+    return get_tag(MPD_TAG_ARTIST);
 }
 
 // Returns -1 if null or error

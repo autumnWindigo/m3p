@@ -1,5 +1,6 @@
 #ifndef MPD_SONG_
 #define MPD_SONG_
+#include "mpd/tag.h"
 #include <mpd/client.h>
 #include <string>
 
@@ -26,6 +27,10 @@ public:
     mpd_song *get(){ return song; };
 
 private:
+    std::string get_tag(mpd_tag_type tag) {
+        return mpd_song_get_tag(song, tag, idx);
+    }
+
     mpd_song *song;
     unsigned idx;
 };
