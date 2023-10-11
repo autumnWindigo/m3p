@@ -25,6 +25,7 @@ public:
 
     // Don't know if necessary yet
     mpd_song *get(){ return song; };
+    unsigned get_idx(){ return idx; };
 
 private:
     std::string get_tag(mpd_tag_type tag) {

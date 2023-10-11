@@ -8,7 +8,7 @@ Song::Song() : song(mpd_recv_song(MPD::Connection::instance()->get())),
                 idx(0) {}
 
 Song::~Song() {
-    mpd_song_free(song);
+    //mpd_song_free(song);
 }
 
 std::string Song::get_date() {

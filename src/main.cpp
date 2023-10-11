@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     MPD::Library lib;
     lib.load_library();
     lib.sort_by_title();
-    //lib.print();
+    lib.print();
 
 
     return a.exec();

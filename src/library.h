@@ -28,12 +28,11 @@ public:
     void sort_by_title();
     void print();
     void sort(std::function<std::string(MPD::Song)>);
-    void sort_temp(mpd_tag_type);
 
 private:
     void prep_library();
 
-    MPD::Song *playlist;
+    std::vector<MPD::Song> playlist;
 
     // acts as upper bound for playlist array
     int song_count;
