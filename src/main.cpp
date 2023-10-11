@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     //w.show();
     MPD::Library lib;
     lib.load_library();
-    lib.sort_by_date();
+    lib.sort_by_title();
     lib.print();
 
 
