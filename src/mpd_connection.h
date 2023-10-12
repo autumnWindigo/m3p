@@ -17,45 +17,82 @@ namespace MPD {
 struct Connection {
 public:
 
+    /**
+     * @brief Constructor for connection to mpd server
+     */
     Connection();
 
+    /**
+     * @brief Deconstructor for MPD::Connection object
+     */
     ~Connection();
 
-    /* Creates an instance of Connection to use */
+    /**
+     * @brief Wrapper for connection instance
+     *
+     * @return static connection to mpd server
+     */
     static Connection* instance()
     {
         static Connection con;
         return &con;
     }
 
-    /* Plays next song in que */
+    /**
+     * @brief plays next song in que
+     */
     void play_next();
 
     /**
-     * Checks if there are any errors in the mpd connection
+     * @brief Checks if there are any errors in the mpd connection
      *  and writes them to std err
      *
      * @return true if error, false otherwise
      */
     bool check_error();
 
-    /* Closes Connection to mpd server */
+    /**
+     * @brief Safely closes connection to mpd server
+     */
     void close_connection();
 
-    /* Connects client to mpd server */
+    /**
+     * @brief Establishes connection to mpd server using config
+     *
+     * @return connection to mpd server
+     */
     mpd_connection* connect();
 
-    /* Set volume 0-100 */
+    /**
+     * @brief Sets volume of mpd server
+     */
     void set_volume(int);
 
-    /* Returns Volume 0-100, -1 if error */
+    /**
+     * @brief returns volume of mpd server
+     *
+     * @return Volume of mpd server, -1 if error
+     */
     int get_volume();
 
-    /* Returns connection */
+    /**
+     * @brief Getter for connection to mpd server
+     *
+     * @return pointer for mpd_connection
+     */
     mpd_connection *get() { return connection; }
 
 private:
+    /** @TODO add more vars here for proper connection using config file */
+
+    /**
+     * @brief connection object for mpd server
+     */
     mpd_connection *connection;
+
+    /**
+     * @brief Port of mpd server
+     */
     int port;
 };
 }
