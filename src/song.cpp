@@ -18,7 +18,7 @@ Song::Song() : song(mpd_recv_song(MPD::Connection::instance()->get())),
  * Frees the memory associated with the MPD song when the Song object is destroyed.
  */
 Song::~Song() {
-    mpd_song_free(song);
+    //mpd_song_free(song);
 }
 
 /** Get the date of the song.
@@ -26,40 +26,42 @@ Song::~Song() {
   */
 
 std::string Song::get_date() {
-    if (is_safe()) return nullptr;
-    return mpd_song_get_tag(song, MPD_TAG_DATE, idx);
+    return get_tag(MPD_TAG_DATE);
 }
 
 /** Get the title of the song.
  *  @return A string representing the title of the song, or nullptr if the song is not safe.
  */
 std::string Song::get_title() {
-    if (is_safe()) return nullptr;
-    assert(song);
-    return mpd_song_get_tag(song, MPD_TAG_TITLE, idx);
+    return get_tag(MPD_TAG_TITLE);
 }
 
 /** Get the artist of the song.
  * @return A string representing the artist of the song, or nullptr if the song is not safe.
  */
 std::string Song::get_artist() {
-    if (is_safe()) return nullptr;
-    assert(song);
-    return mpd_song_get_tag(song, MPD_TAG_ARTIST, idx);
+    return get_tag(MPD_TAG_ARTIST);
 }
 
+<<<<<<< HEAD
 /** Get the length of the song in seconds.
  * @return The length of the song in seconds, or -1 if the song is not safe.
  */
+=======
+>>>>>>> 53f62f30390f0a9da48ed24442146f53a870d114
 int Song::get_length() {
     if (is_safe()) return -1;
     return mpd_song_get_duration(song);
 }
 
+<<<<<<< HEAD
 
 /** Check if the song is safe (not null or in an error state).
  * @return true if the song is safe, false otherwise.
  */
+=======
+/** @TODO make better */
+>>>>>>> 53f62f30390f0a9da48ed24442146f53a870d114
 bool Song::is_safe() {
     if ( song == NULL )
         return false;
