@@ -32,10 +32,37 @@ mpd_song *Library::find_song(std::string search) {
 // TODO Return song based on title
 // Must be sorted to match first
     if (!is_sorted)
+        return null ptr;
+
+    // Convert search string to lowercase to make sure case doesn't mess up the search
+    boost::algorithm:to_lower(search);
+
+    //Binary search to find the song by title
+    int left = 0;
+    int right = playlist.size() - 1;
+
+
+    while(left <= right){
+        int mid = left + (right - left) / 2;
+        MPD::Song& song = playlist[mid];
+        std::string songTitle = song.get_title();
+        boost:algorithm::to_lower(songTitle);
+
+        if (songTitle == search) {
+            return &song; // Found the song
+        } else if (songTitle < search){
+            left = mid + 1;
+        } else {
+            right = mid - 1; // Search in the left half
+        }
+    }
+    /* Code beforehand
+    if (!is_sorted)
         return nullptr;
 
 
     return nullptr;
+    */
 }
 
 void Library::sort(std::function<std::string(MPD::Song)> get_tag_value) {
