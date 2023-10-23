@@ -43,25 +43,17 @@ std::string Song::get_artist() {
     return get_tag(MPD_TAG_ARTIST);
 }
 
-<<<<<<< HEAD
 /** Get the length of the song in seconds.
  * @return The length of the song in seconds, or -1 if the song is not safe.
  */
-=======
->>>>>>> 53f62f30390f0a9da48ed24442146f53a870d114
 int Song::get_length() {
     if (is_safe()) return -1;
     return mpd_song_get_duration(song);
 }
 
-<<<<<<< HEAD
-
 /** Check if the song is safe (not null or in an error state).
  * @return true if the song is safe, false otherwise.
  */
-=======
-/** @TODO make better */
->>>>>>> 53f62f30390f0a9da48ed24442146f53a870d114
 bool Song::is_safe() {
     if ( song == NULL )
         return false;
