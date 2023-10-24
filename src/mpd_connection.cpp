@@ -5,7 +5,7 @@ using namespace std;
 
 namespace MPD {
 
-// Make more clear when we add config support
+/** @TODO Make more robust once we introduce config support */
 Connection::Connection() : connection(connect()),
                                 port(0){}
 
@@ -13,6 +13,7 @@ Connection::~Connection() {
     mpd_connection_free(connection);
 }
 
+/** @TODO Make more robust to make sure all operations are safe */
 bool Connection::check_error()
 {
     if (connection == NULL) {
@@ -49,7 +50,6 @@ void Connection::close_connection()
     mpd_connection_free(connection);
 }
 
-// TODO
 mpd_connection* Connection::connect()
 {
     return mpd_connection_new(NULL, port, 0);
