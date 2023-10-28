@@ -1,3 +1,4 @@
+#include "config.h"
 #include "library.h"
 #include "mainwindow.h"
 #include "mpd/client.h"
@@ -7,13 +8,15 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    //MainWindow w;
     //w.show();
-    MPD::Library lib;
+    /* MPD::Library lib;
     lib.load_library();
     lib.sort_by_title();
-    lib.print();
+    lib.print(); */
 
+    M3P::Config conf;
+    cout << conf.get_path() << endl;
 
     return a.exec();
 }

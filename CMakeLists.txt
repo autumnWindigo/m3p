@@ -12,8 +12,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
-add_compile_options(-fsanitize=address -fno-omit-frame-pointer -Wall)
-add_link_options(-fsanitize=address -fno-omit-frame-pointer -Wall)
+
+add_compile_options(-fsanitize=address -fno-omit-frame-pointer -Wall
+    -lboost_system -lboost_filesystem)
+add_link_options(-fsanitize=address -fno-omit-frame-pointer -Wall
+    -lboost_system -lboost_filesystem)
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -23,6 +26,7 @@ set(PROJECT_SOURCES
         src/mpd_connection.cpp
         src/mpd_connection.h
         src/config.cpp
+        src/config.h
         src/library.h
         src/library.cpp
         src/song.h
