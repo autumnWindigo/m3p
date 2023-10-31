@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     lib.print(); */
 
     M3P::Config conf;
-    cout << conf.get_path() << endl;
+    cout << conf.get().filename() << endl;
 
     return a.exec();
 }

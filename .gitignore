@@ -37,6 +37,7 @@ Thumbs.db
 /.qmake.stash
 .idea/
 compile_commands.json*
+Doxyfile
 
 # qtcreator generated files
 *.pro.user*
