@@ -55,9 +55,6 @@ int Song::get_length() {
  * @return true if the song is safe, false otherwise.
  */
 bool Song::is_safe() {
-    if ( song == NULL )
-        return false;
-    return true;
+    return song != nullptr;
 }
-
 }
