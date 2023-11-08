@@ -19,7 +19,7 @@ public:
     Library();
 
     /**
-     * @brief Deconscructor for Library struct
+     * @brief Deconstructor for Library struct
      */
     ~Library();
 
@@ -32,7 +32,7 @@ public:
     mpd_song *find_song(std::string title);
 
     /**
-     * @brief Innitializes library with current system mpd library
+     * @brief Initializes library with current system mpd library
      */
     void load_library();
 
