@@ -3,6 +3,13 @@
 #include "song.h"
 #include <functional>
 #include <mpd/client.h>
+#include <boost/algorithm/string/case_conv.hpp>
+#include <mpd/song.h>
+#include "mpd_connection.h"
+#include <algorithm>
+#include <cstdlib>
+#include <functional>
+#include "song.h"
 
 namespace MPD {
 

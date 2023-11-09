@@ -1,8 +1,6 @@
-#include "config.h"
-#include "library.h"
 #include "mainwindow.h"
-#include "mpd/client.h"
 #include <QApplication>
+#include "library.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -10,13 +8,17 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     //MainWindow w;
     //w.show();
-    /* MPD::Library lib;
+    MPD::Library lib;
     lib.load_library();
+    cout << "-- Sorted by name --" << endl;
     lib.sort_by_title();
-    lib.print(); */
+    lib.print();
+    cout << "-- Sorted by release date --" << endl;
+    lib.sort_by_date();
+    lib.print();
 
-    M3P::Config conf;
-    cout << conf.get().filename() << endl;
+//    M3P::Config conf;
+  //  cout << conf.get().filename() << endl;
 
     return a.exec();
 }

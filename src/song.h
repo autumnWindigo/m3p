@@ -1,6 +1,9 @@
 #ifndef MPD_SONG_
 #define MPD_SONG_
-#include "mpd/tag.h"
+#include <mpd/tag.h>
+#include "mpd_connection.h"
+#include <mpd/song.h>
+#include <cassert>
 #include <mpd/client.h>
 #include <string>
 
@@ -45,6 +48,7 @@ public:
      * @brief Getter for artist tag in audio file
      */
     std::string get_artist();
+
     int get_length();
 
     /**

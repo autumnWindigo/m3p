@@ -1,7 +1,4 @@
 #include "song.h"
-#include "mpd/song.h"
-#include "mpd_connection.h"
-#include <cassert>
 
 /**
  * Constructor for the Song class.

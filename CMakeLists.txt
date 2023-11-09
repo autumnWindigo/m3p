@@ -9,14 +9,15 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_MODULE_PATH $CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Boost REQUIRED COMPONENTS filesystem)
+find_package(LibMPDClient REQUIRED)
 
-
-add_compile_options(-fsanitize=address -fno-omit-frame-pointer -Wall
-    -lboost_system -lboost_filesystem)
-add_link_options(-fsanitize=address -fno-omit-frame-pointer -Wall
-    -lboost_system -lboost_filesystem)
+add_compile_options(-fsanitize=address -fno-omit-frame-pointer -Wall)
+add_link_options(-fsanitize=address -fno-omit-frame-pointer -Wall)
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -56,9 +57,12 @@ else()
     endif()
 endif()
 
-target_include_directories(m3p PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${LIBMPDCLIENT_INCLUDE_DIR})
+
+#target_include_directories(m3p PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(m3p PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(m3p PRIVATE ${CMAKE_SOURCE_DIR}/lib/libmpdclient.so.2.21)
+target_link_libraries(m3p PRIVATE ${Boost_LIBRARIES})
+target_link_libraries(m3p PRIVATE ${LIBMPDCLIENT_LIBRARY})
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

@@ -1,5 +1,6 @@
 #include "mpd_connection.h"
-#include "mpd/connection.h"
+#include <mpd/connection.h>
+#include <mpd/mixer.h>
 
 using namespace std;
 

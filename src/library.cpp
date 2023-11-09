@@ -1,11 +1,5 @@
-#include "mpd/song.h"
-#include "song.h"
 #include "library.h"
-#include "mpd_connection.h"
-#include <algorithm>
-#include <boost/algorithm/string/case_conv.hpp>
-#include <cstdlib>
-#include <functional>
+#include <mpd/search.h>
 
 namespace MPD{
 Library::Library() : playlist(), song_count(0) {};

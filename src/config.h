@@ -7,6 +7,9 @@
 #include <boost/json.hpp>
 #include <boost/json/src.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
+#include <iostream>
 
 
 #ifdef __linux__

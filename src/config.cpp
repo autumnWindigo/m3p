@@ -1,7 +1,4 @@
 #include "config.h"
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
-#include <iostream>
 /* Get config file based on Operating System
  For linux, we need to load a default config into /etc/
  and let the user create one in ~/.config/m3p/

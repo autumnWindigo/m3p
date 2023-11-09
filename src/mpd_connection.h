@@ -1,7 +1,7 @@
 #ifndef MPD_CONNECTION_
 #define MPD_CONNECTION_
 
-#include "mpd/song.h"
+#include <mpd/song.h>
 #include <mpd/client.h>
 #include <mpd/connection.h>
 #include <mpd/error.h>
