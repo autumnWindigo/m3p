@@ -35,8 +35,10 @@ Thumbs.db
 *.rc
 /.qmake.cache
 /.qmake.stash
+.idea/
 compile_commands.json*
-
+Doxyfile
+/node_modules
 # qtcreator generated files
 *.pro.user*
 CMakeLists.txt.user*
@@ -73,3 +75,8 @@ CMakeLists.txt.user*
 # --------
 *.dll
 *.exe
+
+
+# Added by cargo
+
+/target
