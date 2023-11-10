@@ -1,5 +1,6 @@
 use std::str;
 use async_mpd::MpdClient;
+use serde_derive::{Serialize, Deserialize};
 
 pub struct Connection {
     pub connection: MpdClient,
@@ -14,4 +15,10 @@ impl Connection {
     pub fn get_address(&self) -> &str {
         &self.ip
     }
+}
+
+#[derive(Default, Serialize, Deserialize)]
+struct Config {
+    mpd_ip: String,
+
 }
