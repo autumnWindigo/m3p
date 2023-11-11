@@ -1,18 +1,24 @@
 use std::str;
-use async_mpd::MpdClient;
+use mpd::Client;
 use serde_derive::{Serialize, Deserialize};
+use neon::types::Finalize;
 
 pub struct Connection {
-    pub connection: MpdClient,
+    pub connection: Option<Client>,
     pub ip: String
 }
 
+impl Finalize for Connection {}
+
 impl Connection {
-    pub async fn init(&mut self) -> Result<String, async_mpd::Error> {
-        self.connection.connect("127.0.0.1:6600").await
+    pub fn init(&mut self) {
+        self.connection = match Client::connect("127.0.0.1:6600") {
+            Ok(result) => Some(result),
+            Err(_) => None
+        }
     }
 
-    pub fn get_address(&self) -> &str {
+    pub fn get_ip(&self) -> &String {
         &self.ip
     }
 }
@@ -20,5 +26,5 @@ impl Connection {
 #[derive(Default, Serialize, Deserialize)]
 struct Config {
     mpd_ip: String,
-
+    vim_binds: bool
 }
