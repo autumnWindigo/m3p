@@ -16,11 +16,15 @@ impl Finalize for Connection {}
 // Implement methods for the Connection struct
 impl Connection {
     // Method to initialize the connection to the MPD server
-    pub fn init(&mut self) {
+    pub fn init(&mut self) -Result<(), String> {
         // Attempt to connect to the MPD server at "127.0.0.1:6600"
-        self.connection = match Client::connect("127.0.0.1:6600") {
-            Ok(result) => Some(result), // If successful, store the client connection
-            Err(_) => None // If unsuccessful, store None
+        match Client::conect("127.0.0.1:6600") {
+            Ok(result) => {Some(result), }
+                self.connection = Some(result) // If successful, store the client connection
+                Ok(())
+            }
+            // If unsuccessful, store error message
+            Err(err) => Err(format!("Failed to connect to the MPD server: {}", err))
         }
     }
 
@@ -28,12 +32,6 @@ impl Connection {
     pub fn get_ip(&self) -> &String {
         &self.ip
     }
-    pub fn new(ip: String) -> Self {
-            Self {
-                connection: None,
-                ip,
-            }
-        }
 }
 
 // Define a configuration struct with default, serializable, and deserializable attributes
@@ -41,4 +39,18 @@ impl Connection {
 struct Config {
     mpd_ip: String, // MPD server IP address
     vim_binds: bool // Boolean flag for Vim key bindings
+}
+fn main() {
+    // Example usage for how we can proceed:
+    let mut connection = Connection {
+        connection: None,
+        ip: String::from("127.0.0.1"),
+    };
+
+    if let Err(err) = connection.init() {
+        eprintln!("Error initializing connection: {}", err);
+        // Handle the error as needed
+    } else {
+        println!("Connection initialized successfully. IP: {}", connection.get_ip());
+    }
 }
