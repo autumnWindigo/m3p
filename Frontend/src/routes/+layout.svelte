@@ -1,8 +1,10 @@
 <script>
+	import Toolbar from './Toolbar.svelte';
 	import './global.css';
 </script>
 
 <div class="app">
+	<Toolbar/>
 	<main>
 		<slot />
 	</main>
