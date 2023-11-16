@@ -7,6 +7,24 @@
 </svelte:head>
 
 <main>
-	<h1>Welcome to m3p!</h1>
-	<a href="/player">Begin</a>
+	<h1>m3p</h1>
+	<h3>configurable music player</h3>
+	<a href="/player">begin</a>
 </main>
+
+<style>
+	main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 0 auto;
+	}
+
+	h3 {
+		padding-bottom: 5rem;
+	}
+
+	a {
+		background-color: gold;
+	}
+</style>

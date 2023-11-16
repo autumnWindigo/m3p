@@ -27,9 +27,19 @@
     }
 </script>
 
+<div class={`toolbar ${showToolbar ? '' : 'hidden'}`}>
+    <!-- This is where we add our tool bar info -->
+    <!-- I included some blank examples as a placeholder-->
+    <span>profile info</span>
+    <span>tools</span>
+</div>
+
 <style>
     .toolbar {
-        background-color: #333;
+        display: flex;
+        justify-content: space-evenly;
+
+        background-color: #33373B;
         color: white;
         padding: 10px;
         position: fixed;
@@ -45,10 +55,3 @@
         transform: translateY(-100%);
     }
 </style>
-
-<div class={`toolbar ${showToolbar ? '' : 'hidden'}`}>
-    <!-- This is where we add our tool bar info -->
-    <!-- I included some blank examples as a placeholder-->
-    <span>Profile Info</span>
-    <span>Tools</span>
-</div>
