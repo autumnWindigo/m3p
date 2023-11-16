@@ -30,8 +30,9 @@
 <div class={`toolbar ${showToolbar ? '' : 'hidden'}`}>
     <!-- This is where we add our tool bar info -->
     <!-- I included some blank examples as a placeholder-->
-    <span>profile info</span>
-    <span>tools</span>
+    <a href="/profile">profile</a>
+    <a href="/tools">tools</a>
+    <a href="/settings">settings</a>
 </div>
 
 <style>
@@ -39,6 +40,7 @@
         display: flex;
         justify-content: space-evenly;
 
+        opacity: 0.9;
         background-color: #33373B;
         color: white;
         padding: 10px;
@@ -53,5 +55,9 @@
 
     .toolbar.hidden {
         transform: translateY(-100%);
+    }
+
+    a {
+        background-color: gold;
     }
 </style>
