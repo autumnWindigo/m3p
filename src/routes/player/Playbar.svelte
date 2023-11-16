@@ -1,14 +1,12 @@
 <script>
     let paused = true;
-    function handlePlayPause() {
-        paused = !paused;
-    }
+    let volume = 50;
 
-    let volume = 0;
+    function handlePlayPause() { paused = !paused; }
 </script>
 
 <div id="playbar-background">
-    <button id="play-pause" on:click={handlePlayPause}>{paused ? "\u23F8" : "\u23F5"}</button>
+    <button id="play-pause" on:click={handlePlayPause}>{paused ? "\u23F5" : "\u23F8"}</button>
     <input id="seek-slider" type="range" value="0">
     <input id="volume" type="range" bind:value={volume}>
     
@@ -36,7 +34,12 @@
         height: 0.25rem;
         border-radius: 0.25rem;
         background-color: #B7790B;
+        transition: 0.2s;
         
+    }
+
+    #seek-slider:hover {
+        background-color: #FFB916;
     }
 
     #seek-slider::-webkit-slider-thumb {
@@ -44,7 +47,9 @@
         appearance: none;
         width: 0;
         height: 0;
+        transition: 0.2s;
     }
+
     #seek-slider:hover::-webkit-slider-thumb {
         width: 5px;
         height: 10px;
@@ -57,21 +62,27 @@
     #seek-slider::-moz-range-thumb {
         width: 0;
         height: 0;
+        transition: 0.2s;
     }
+
     #seek-slider:hover::-moz-range-thumb {
         width: 5px;
         height: 10px;
         background-color: ivory;
         border-radius: 10px;
         border-width: 0;
+
+        
     }
 
     #play-pause {
         appearance: none;
         border: none;
-        background-color: inherit;
+        background-color: #1C2126;
         color: gold;
-        width: 3rem;
+        border-radius: 3rem;
+        margin: 0 1.5rem;
+        scale: 1.25;
     }
 
     #volume {
@@ -82,6 +93,15 @@
         border-radius: 0.25rem;
         margin: 0 1rem;
         background-color: gold;
+    }
+
+    #volume::-webkit-slider-thumb {
+        width: 10px;
+        height: 10px;
+        background-color: ivory;
+        border-radius: 10px;
+        border: "solid";
+        border-color: #1C2126;
     }
 
     #volume::-moz-range-thumb {

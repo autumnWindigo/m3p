@@ -18,7 +18,6 @@
         }
     });
 
-
     function handleKeyDown(event) {
         // Check if the pressed key is '=' or '+'
         if (event.key === '=' || event.key === '+') {
@@ -30,6 +29,7 @@
 <div class={`toolbar ${showToolbar ? '' : 'hidden'}`}>
     <!-- This is where we add our tool bar info -->
     <!-- I included some blank examples as a placeholder-->
+    <p>m3p</p>
     <a href="/profile">profile</a>
     <a href="/tools">tools</a>
     <a href="/settings">settings</a>
@@ -40,9 +40,8 @@
         display: flex;
         justify-content: space-evenly;
 
-        opacity: 0.9;
         background-color: #33373B;
-        color: white;
+        color: ivory;
         padding: 10px;
         position: fixed;
         top: 0;
@@ -59,5 +58,11 @@
 
     a {
         background-color: gold;
+        scale: 0.75;
+    }
+
+    p {
+        position: absolute;
+        left: 1rem;
     }
 </style>
