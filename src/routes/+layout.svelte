@@ -1,6 +1,9 @@
 <script>
 	import Toolbar from './Toolbar.svelte';
+	import { Router, Route } from 'svelte-routing';
 	import './global.css';
+	import Profile from './Profile.svelte';
+	import Settings from './Settings.svelte';
 </script>
 
 <div class="app">
