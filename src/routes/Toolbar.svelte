@@ -2,7 +2,7 @@
 <script>
     import { onMount } from 'svelte';
 
-    let showToolbar = true;
+    let showToolbar = false;
 
     export function toggleToolbar() {
         showToolbar = !showToolbar;
@@ -12,7 +12,7 @@
         //Listen for keydown event on the document
         window.addEventListener('keydown', handleKeyDown);
 
-        return() => {
+        return () => {
             //Cleanup: Remove the event listener when the component is unmounted
             window.removeEventListener('keydown', handleKeyDown);
         }
@@ -30,9 +30,9 @@
     <!-- This is where we add our tool bar info -->
     <!-- I included some blank examples as a placeholder-->
     <p>m3p</p>
-    <a href="/profile">profile</a>
-    <a href="/tools">tools</a>
-    <a href="/settings">settings</a>
+    <a href="/profile" on:click={toggleToolbar}>profile</a>
+    <a href="/tools" on:click={toggleToolbar}>tools</a>
+    <a href="/settings" on:click={toggleToolbar}>settings</a>
 </div>
 
 <style>
@@ -58,7 +58,7 @@
 
     a {
         background-color: gold;
-        scale: 0.75;
+        /**scale: 0.75; when the buttons are scaled the hover animation bugs out, gotta fix this */
     }
 
     p {
