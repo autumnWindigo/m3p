@@ -20,6 +20,8 @@
             <span class="slider"></span>
         </label>
     </div>
+
+    <a href="/">Back</a>
 </div>
 
 <style>

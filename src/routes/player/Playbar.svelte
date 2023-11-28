@@ -71,15 +71,13 @@
         background-color: ivory;
         border-radius: 10px;
         border-width: 0;
-
-        
     }
 
     #play-pause {
         appearance: none;
         border: none;
         background-color: #1C2126;
-        color: gold;
+        color: #FFCF50;
         border-radius: 3rem;
         margin: 0 1.5rem;
         scale: 1.25;
@@ -92,25 +90,42 @@
         height: 0.25rem;
         border-radius: 0.25rem;
         margin: 0 1rem;
-        background-color: gold;
+        background-color: #FFCF50;
     }
 
     #volume::-webkit-slider-thumb {
-        width: 10px;
-        height: 10px;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 0.5rem;
+        height: 0.5rem;
         background-color: ivory;
-        border-radius: 10px;
+        border-radius: 0.5rem;
         border: "solid";
         border-color: #1C2126;
+        border-width: 2px;
+        transition: 0.1s;
     }
 
     #volume::-moz-range-thumb {
-        width: 10px;
-        height: 10px;
+        width: 0.5rem;
+        height: 0.5rem;
         background-color: ivory;
-        border-radius: 10px;
+        border-radius: 0.5rem;
         border: "solid";
         border-color: #1C2126;
+        transition: 0.1s;
+    }
+
+    #volume:hover::-webkit-slider-thumb {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 1rem;
+    }
+
+    #volume:hover::-moz-range-thumb {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 1rem;
     }
 
 </style>
