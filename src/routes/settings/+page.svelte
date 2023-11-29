@@ -20,7 +20,7 @@
         <span class="slider"></span>
     </div>
 
-    <p class="section-heading red-bold">Subscribe to Email</p>
+    <p class="section-heading">Subscribe to Email</p>
     <label class="subscribe-label">
         <input type="checkbox" bind:checked={yes} />
         <span class="subscribe-text">Subscribe</span>
@@ -47,7 +47,8 @@
 	.auto-play-toggle {
 		display: flex;
 		align-items: center;
-		margin-top: 20px;
+		margin-top: 10px;
+		margin-bottom: 20px;
 	}
 	
 	.settings-heading{
@@ -60,26 +61,26 @@
 		margin-bottom: 10px;
 	}
 	
-	.red-bold{
-		color: red;
-		font-weight: bold;
-	}
-	
 	.subscribe-label {
 		display: flex;
 		align-items:center;
 		margin-top: 10px;
 		cursor: pointer;
+		color: red;
+		font-weight: bold;
 	}
 	
 	.subscribe-label input {
-		display: none;
+		margin-right: 10px;
 	}
 	
 	.subscribe-text {
 		margin-left: 5px;
 	}
 
+	input {
+		display: none;
+	}
 	.slider {
 		position: absolute;
 		cursor: pointer;
