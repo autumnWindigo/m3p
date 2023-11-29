@@ -20,7 +20,7 @@
 	</label>
 	<h3>Subscribe to email</h3>
 	<label>
-		<input type="checkbox" bind:checked={"yes"} />
+		<input type="checkbox" bind:checked={yes} />
 	</label>
 	{#if yes}
 	<p>Thank you. We will bombard your inbox and sell your personal details.</p>
@@ -30,7 +30,7 @@
 	<button disabled={!yes}> Subscribe </button>
 	
 	<p>Change color</p>
-	<p>About</p>
+	<a href="/">About</a>
 	<a href="/">Back</a>
 	
 </main>
