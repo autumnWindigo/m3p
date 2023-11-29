@@ -14,13 +14,13 @@
 <main>
 	<h1>{userName}'s Settings</h1>
 
-    <p class="section-heading">Auto-play Settings</p>
-    <div class="auto-play-toggle">
-        <input type="checkbox" bind:checked={isAutoPlayEnabled}/>
-        <span class="slider"></span>
-    </div>
+	<p>Auto-play</p>
+	<label class="auto-play-toggle">
+		<input type="checkbox" bind:checked={"isAutoPlayEnabled"}/>
+		<span class = "slider"></span>
+	</label>
 
-    <p class="section-heading">Subscribe to Email</p>
+	<p>Subscribe to Email</p>
     <label class="subscribe-label">
         <input type="checkbox" bind:checked={yes} />
        Subscribe
@@ -50,12 +50,6 @@
 		margin-top: 10px;
 		margin-bottom: 20px;
 	}
-
-	
-	.section-heading{
-		font-size: 1.2em;
-		margin-bottom: 10px;
-	}
 	
 	.subscribe-label {
 		display: flex;
@@ -69,14 +63,11 @@
 	.subscribe-label input {
 		margin-right: 10px;
 	}
-	
-	.subscribe-text {
-		margin-left: 5px;
-	}
 
 	input {
 		display: none;
 	}
+	
 	.slider {
 		position: absolute;
 		cursor: pointer;
