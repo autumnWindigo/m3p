@@ -2,6 +2,7 @@
 <script>
     let userName = "John Doe";
     let isAutoPlayEnabled = false;
+	let yes = false;
 
     function toggleAutoPlay() {
         isAutoPlayEnabled = !isAutoPlayEnabled;
@@ -10,19 +11,31 @@
     }
 </script>
 
-<div class="settings-container">
-    <h1>{userName}'s Settings</h1>
+<main>
+	<h1>{userName}'s Settings</h1>
+	<h3>Auto-play</h3>
+	<label>
+		<input type="checkbox" bind:checked={isAutoPlayEnabled}/>
+		<span class="slider"></span>
+	</label>
+	<h4>Subscribe to email</h4>
+	<label>
+		<input type="checkbox" bind:checked={yes} />
+		Yes! Send me regular email spam
+	</label>
+	{#if yes}
+	<p>Thank you. We will bombard your inbox and sell your personal details.</p>
+	{:else}
+	<p>You must opt-in to continue. If you're not paying, you're the product.</p>
+	{/if}
+	<button disabled={!yes}> Subscribe </button>
+	
+	<h5>Change color</h5>
+	<h6>About</h6>
+	<a href="/">Back</a>
+	
+</main>
 
-    <div class="auto-play-toggle">
-        <p>Auto-play</p>
-        <label>
-            <input type="checkbox" bind:checked={isAutoPlayEnabled} />
-            <span class="slider"></span>
-        </label>
-    </div>
-
-    <a href="/">Back</a>
-</div>
 
 <style>
     /* Add styling for the settings page */
