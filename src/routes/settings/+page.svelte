@@ -12,7 +12,7 @@
 </script>
 
 <main>
-    <p class="settings-heading">{userName}'s Settings</p>
+	<h1>{userName}'s Settings</h1>
 
     <p class="section-heading">Auto-play Settings</p>
     <div class="auto-play-toggle">
@@ -23,7 +23,7 @@
     <p class="section-heading">Subscribe to Email</p>
     <label class="subscribe-label">
         <input type="checkbox" bind:checked={yes} />
-        <span class="subscribe-text">Subscribe</span>
+       Subscribe
     </label>
 
     {#if yes}
@@ -50,11 +50,7 @@
 		margin-top: 10px;
 		margin-bottom: 20px;
 	}
-	
-	.settings-heading{
-		font-size: 1.5em;
-		margin-bottom: 10px;
-	}
+
 	
 	.section-heading{
 		font-size: 1.2em;
