@@ -1,9 +1,10 @@
 <script>
 	import Toolbar from './Toolbar.svelte';
 	import './global.css';
+	import { colorMode } from './colorMode.js';
 </script>
 
-<div class="app">
+<div class="app" style="background-color: {$colorMode === 'dark' ? '#333': 'ivory'};">
 	<Toolbar/>
 	<main>
 		<slot />
@@ -20,7 +21,6 @@
 		flex-direction: column;
 		align-items: center;
 		min-height: 100vh;
-		background-color: ivory;
 	}
 
 	main {
