@@ -1,7 +1,7 @@
 <!-- Settings +page.svelte -->
 <script>
 	import { onMount } from 'svelte';
-	import { colorMode } from './colorMode.js';
+	import { colorMode } from '../colorMode.js';
 	
 	let userName = "John Doe";
 	let isAutoPlayEnabled = false;
@@ -13,15 +13,14 @@
 	}
 	
 	function toggleDarkMode() {
-		colorMode.update(mode=> (mode === 'light' ? 'dark' : 'light'));
+		colorMode.update(mode => (mode === 'light' ? 'dark' : 'light'));
 		console.log("Dark mode state changed:", $colorMode);
 	}
 	
-	$: updateBackgroundColor();
-	
 	function updateBackgroundColor() {
 		const body = document.body;
-		if ($colorMode == 'dark'){
+		if ($colorMode == 'dark') {
+			// later down the line the colors shouldn't be set manually like this, should be a function that picks the dark mode styling out of the global.css file
 			body.style.backgroundColor = '#333';
 		} else {
 			body.style.backgroundColor = 'ivory';
@@ -34,33 +33,57 @@
 	
 </script>
 
-<div class="settings-container">
-    <h1>{userName}'s settings</h1>
+<main>
+	<h1>{userName}'s settings</h1>
 
-    <div class="auto-play-toggle">
-        <p>auto-play</p>
-        <label>
-            <input type="checkbox" bind:checked={isAutoPlayEnabled} />
-            <span class="slider"></span>
-        </label>
-    </div>
+    <div class="settings-container">
+        <div class="toggle">
+            <p>auto-play</p>
+            <label>
+                <input type="checkbox" bind:checked={isAutoPlayEnabled} />
+                <span class="slider"></span>
+            </label>
+        </div>
 
-    <p class="section-heading">Change Color</p>
-	<button on:click={toggleDarkMode} class="color-mode-button">
-		Toggle Dark Mode: {$colorMode === 'dark' ? 'On' : 'Off'}
-	</button>
+		<div class="toggle">
+			<p>dark mode</p>
+            <label>
+                <input type="checkbox" on:click={toggleDarkMode} />
+                <span class="slider"></span>
+            </label>
+		</div>
+	</div>
 
-    <a href="/">About us</a>
-	<a href="/">Listening history</a> /*at some point we can import an array that adds on any song listened to in the session*/
-    <a href="/">Back</a>
+	<div class="additional-info">
+        <a href="/">About us</a>
+        <a href="/">Listening history</a> <!-- at some point we can import an array that adds on any song listened to in the session -->
+        <a href="/">Back</a>
+	</div>
 </main>
+
 <style>
     /* Add styling for the settings page */
-    .settings-container {
+    main {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
         padding: 20px;
     }
 
-    .auto-play-toggle {
+	.settings-container {
+		display: flex;
+		flex-direction: column;
+		align-items: end;
+	}
+
+	.additional-info {
+		position: absolute;
+		display: flex;
+		bottom: 0;
+	}
+
+    .toggle {
         display: flex;
         align-items: center;
         margin-top: 20px;
@@ -111,15 +134,5 @@
 
 	input:checked + .slider:before {
 	transform: translateX(26px);
-	}
-
-	.color-mode-button {
-	margin-top: 10px;
-	padding: 10px;
-	background-color: #2196F3; /* Set a background color for better visibility */
-	color: #fff; /* Set text color */
-	cursor: pointer;
-	border: none;
-	border-radius: 4px;
 	}
 </style>
