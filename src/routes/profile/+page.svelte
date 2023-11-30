@@ -94,7 +94,6 @@
 	li {
 		margin-bottom: 8px;
 	}
-=======
 <div id="profile">
     <h1>profile</h1>
     <a href="/">back</a>
@@ -106,5 +105,4 @@
         flex-direction: column;
         align-items: center;
     }
->>>>>>> 2f591d2595f73f0e126cec17b129cae7c7c8fc15
 </style>
