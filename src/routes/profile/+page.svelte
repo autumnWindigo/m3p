@@ -53,56 +53,45 @@
 
 <style>
 	main.profile-page {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
 	}
 
 	.profile-info {
-		margin-bottom: 20px;
-		text-align: center;
+	margin-bottom: 20px;
+	text-align: center;
 	}
 
 	input {
-		margin-right: 10px;
-		padding: 8px;
-		font-size: 16px;
+	margin-right: 10px;
+	padding: 8px;
+	font-size: 16px;
 	}
 
 	button {
-		background-color: #2196F3;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		padding: 8px;
-		cursor: pointer;
-		font-size: 16px;
+	background-color: #2196F3;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 8px;
+	cursor: pointer;
+	font-size: 16px;
 	}
 
 	.favorite-songs {
-		text-align: center;
-		margin-top: 20px;
-		margin-bottom: 70px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 70px;
 	}
 
 	ul {
-		list-style-type: none;
-		padding: 0;
+	list-style-type: none;
+	padding: 0;
 	}
 
 	li {
-		margin-bottom: 8px;
+	margin-bottom: 8px;
 	}
-<div id="profile">
-    <h1>profile</h1>
-    <a href="/">back</a>
-</div>
-
-<style>
-    #profile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
 </style>
