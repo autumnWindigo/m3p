@@ -11,22 +11,25 @@
 </script>
 
 <div class="settings-container">
-    <h1>{userName}'s Settings</h1>
+    <h1>{userName}'s settings</h1>
 
     <div class="auto-play-toggle">
-        <p>Auto-play</p>
+        <p>auto-play</p>
         <label>
             <input type="checkbox" bind:checked={isAutoPlayEnabled} />
             <span class="slider"></span>
         </label>
     </div>
 
-    <a href="/">Back</a>
+    <a href="/">back</a>
 </div>
 
 <style>
     /* Add styling for the settings page */
     .settings-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 20px;
     }
 
@@ -36,9 +39,16 @@
         margin-top: 20px;
     }
 
+    p {
+        margin: 0 .75rem 0 0;
+    }
+
+    a {
+        margin: 1rem;
+    }
+
     label {
         position: relative;
-        display: inline-block;
         width: 60px;
         height: 34px;
     }
@@ -50,17 +60,14 @@
     .slider {
         position: absolute;
         cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
         background-color: #ccc;
         border-radius: 34px;
         transition: .4s;
     }
 
     input:checked + .slider {
-        background-color: #2196F3;
+        background-color: gold;
     }
 
     .slider:before {
