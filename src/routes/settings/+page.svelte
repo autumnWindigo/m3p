@@ -1,7 +1,7 @@
 <!-- Settings +page.svelte -->
 <script>
 	import { onMount } from 'svelte';
-	import { colorMode } from './colorMode.js';
+	import { colorMode } from '../colorMode.js';
 	
 	let userName = "John Doe";
 	let isAutoPlayEnabled = false;
@@ -13,15 +13,14 @@
 	}
 	
 	function toggleDarkMode() {
-		colorMode.update(mode=> (mode === 'light' ? 'dark' : 'light'));
+		colorMode.update(mode => (mode === 'light' ? 'dark' : 'light'));
 		console.log("Dark mode state changed:", $colorMode);
 	}
 	
-	$: updateBackgroundColor();
-	
 	function updateBackgroundColor() {
 		const body = document.body;
-		if ($colorMode == 'dark'){
+		if ($colorMode == 'dark') {
+			// later down the line the colors shouldn't be set manually like this, should be a function that picks the dark mode styling out of the global.css file
 			body.style.backgroundColor = '#333';
 		} else {
 			body.style.backgroundColor = 'ivory';
@@ -35,67 +34,91 @@
 </script>
 
 <main>
-	<h1>{userName}'s Settings</h1>
+	<h1>{userName}'s settings</h1>
 
-	<div class="auto-play-toggle">
-		<p>Auto-play</p>
-		<label>
-			<input type="checkbox" bind:checked={isAutoPlayEnabled}/>
-			<span class = "slider"></span>
-		</label>
+    <div class="settings-container">
+        <div class="toggle">
+            <p>auto-play</p>
+            <label>
+                <input type="checkbox" bind:checked={isAutoPlayEnabled} />
+                <span class="slider"></span>
+            </label>
+        </div>
+
+		<div class="toggle">
+			<p>dark mode</p>
+            <label>
+                <input type="checkbox" on:click={toggleDarkMode} />
+                <span class="slider"></span>
+            </label>
+		</div>
 	</div>
 
-    <p class="section-heading">Change Color</p>
-	<button on:click={toggleDarkMode} class="color-mode-button">
-		Toggle Dark Mode: {$colorMode === 'dark' ? 'On' : 'Off'}
-	</button>
-
-    <a href="/">About us</a>
-	<a href="/">Listening history</a> /*at some point we can import an array that adds on any song listened to in the session*/
-    <a href="/">Back</a>
+	<div class="additional-info">
+        <a href="/">About us</a>
+        <a href="/">Listening history</a> <!-- at some point we can import an array that adds on any song listened to in the session -->
+        <a href="/">Back</a>
+	</div>
 </main>
+
 <style>
-	main {
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    /* Add styling for the settings page */
+    main {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+        padding: 20px;
+    }
+
+	.settings-container {
+		display: flex;
+		flex-direction: column;
+		align-items: end;
 	}
 
-	.auto-play-toggle {
-	display: flex;
-	align-items: center;
-	margin-top: 20px;
+	.additional-info {
+		position: absolute;
+		display: flex;
+		bottom: 0;
 	}
 
-	label {
-	position: relative;
-	display: inline-block;
-	width: 60px;
-	height: 34px;
-	}
+    .toggle {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    p {
+        margin: 0 .75rem 0 0;
+    }
+
+    a {
+        margin: 1rem;
+    }
+
+    label {
+        position: relative;
+        width: 60px;
+        height: 34px;
+    }
 
 	input {
 	display: none;
 	}
 
-	.slider {
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 60px;
-	height: 34px;
-	background-color: #ccc;
-	border-radius: 34px;
-	transition: .4s;
-	}
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background-color: #ccc;
+        border-radius: 34px;
+        transition: .4s;
+    }
 
-	input:checked + .slider {
-	background-color: #2196F3;
-	}
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
 
 	.slider:before {
 	position: absolute;
@@ -111,15 +134,5 @@
 
 	input:checked + .slider:before {
 	transform: translateX(26px);
-	}
-
-	.color-mode-button {
-	margin-top: 10px;
-	padding: 10px;
-	background-color: #2196F3; /* Set a background color for better visibility */
-	color: #fff; /* Set text color */
-	cursor: pointer;
-	border: none;
-	border-radius: 4px;
 	}
 </style>
