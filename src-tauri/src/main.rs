@@ -13,7 +13,9 @@ async fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            config::set_config_by_key
+            config::set_config_by_key,
+            timereturn,
+            timechange,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
