@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use serde_json::Value;
 use youtube_dl::{self, YoutubeDlOutput, YoutubeDl};
 
 use async_mpd::{MpdClient, Status, Filter, Tag, Track, ToFilterExpr};
@@ -27,7 +28,6 @@ pub async fn update_library() -> HashMap::<String, u32> {
 
     let song_list = client.queue().await;
 
-    // song_list.into_iter().map(|track| song_map.insert("".to_string(), 0));
     for song in song_list.unwrap() {
         song_map.insert(song.title.expect("Song doesn't have title"), song.id.expect("Song doesn't have id"));
     }
@@ -46,13 +46,18 @@ pub async fn search_title(title: String) -> Vec<Track> {
     client.search(&filter).await.expect("Search Failed")
 }
 
+// Returns JSON output of the download
 #[tauri::command]
-pub async fn download_song(link: String) -> bool {
+pub async fn download_song(link: String) -> Value {
     let output = YoutubeDl::new(link)
         .socket_timeout("15")
         .extract_audio(true)
-        .extra_arg("--force-ipv4 --embed-thumbnail --embed-metadata --audio-format best --audio-quality 0")
-        .download_to_async("~/music").await; // Where music is stored
+        .extra_arg("--force-ipv4")
+        .extra_arg("--embed-thumbnail")
+        .extra_arg("--embed-metadata")
+        .extra_arg("--audio-format best")
+        .extra_arg("--audio-quality 0")
+        .run_raw_async().await; // Where music is stored
 
-    true
+    output.unwrap()
 }
