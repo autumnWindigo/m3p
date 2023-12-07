@@ -90,7 +90,7 @@
         height: 0.25rem;
         border-radius: 0.25rem;
         margin: 0 1rem;
-        background-color: #FFCF50;
+        background-color: #1C2126;
     }
 
     #volume::-webkit-slider-thumb {
@@ -126,6 +126,10 @@
         width: 1rem;
         height: 1rem;
         border-radius: 1rem;
+    }
+
+    #volume::-moz-range-progress {
+        background-color: gold;
     }
 
 </style>
