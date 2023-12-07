@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use youtube_dl::{self, YoutubeDlOutput, YoutubeDl};
 
 use async_mpd::{MpdClient, Status, Filter, Tag, Track, ToFilterExpr};
 
@@ -6,8 +7,8 @@ use async_mpd::{MpdClient, Status, Filter, Tag, Track, ToFilterExpr};
 pub async fn toggle_play() {
     let mut client = MpdClient::new();
     client.connect("127.0.0.1:6600").await.expect("cannot connect to client");
-    client.status();
-    client.play();
+    let _ = client.status().await;
+    let _ = client.play().await;
 }
 
 #[tauri::command]
@@ -39,8 +40,19 @@ pub async fn search_title(title: String) -> Vec<Track> {
     let mut client = MpdClient::new();
     client.connect("127.0.0.1:6600").await.expect("cannot connect to client");
 
-    let mut filter = Filter::new()
+    let filter = Filter::new()
         .and(Tag::Title.contains(title));
 
     client.search(&filter).await.expect("Search Failed")
+}
+
+#[tauri::command]
+pub async fn download_song(link: String) -> bool {
+    let output = YoutubeDl::new(link)
+        .socket_timeout("15")
+        .extract_audio(true)
+        .extra_arg("--force-ipv4 --embed-thumbnail --embed-metadata --audio-format best --audio-quality 0")
+        .download_to_async("~/music").await; // Where music is stored
+
+    true
 }
