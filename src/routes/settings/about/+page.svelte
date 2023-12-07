@@ -107,8 +107,7 @@
 			<strong>Customer Service and Support</strong>
 		</h2>
 		<p>
-			<!-- Add content for the Customer Service and Support section -->
-			For inquiries, please <a href="sjuadvising@sju.edu">contact us</a>.
+			For inquiries, please <a href="https://directory.sju.edu/george-j-grevera">contact us</a>.
 		</p>
 	</section>
     <a href="/">back</a>
