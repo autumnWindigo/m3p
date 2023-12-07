@@ -132,8 +132,4 @@
         background-color: gold;
     }
 
-    #volume::-moz-range-progress {
-        background-color: gold;
-    }
-
 </style>
