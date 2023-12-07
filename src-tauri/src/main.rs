@@ -3,6 +3,7 @@
 mod commands;
 mod client;
 use commands::config;
+use commands::player;
 
 #[tokio::main]
 async fn main() {
@@ -14,8 +15,12 @@ async fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             config::set_config_by_key,
-            timereturn,
-            timechange,
+            player::download_song,
+            player::update_library,
+            player::search_title,
+            player::mpd_status,
+            player::toggle_play,
+
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
