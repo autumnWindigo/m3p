@@ -7,7 +7,7 @@
 		<p>
 			<strong>Your Music, Your Way:</strong>Welcome to Minimal Multi-platform Music Player (M3P),where music meets customization and control.
 			At its core, M3P is more than just a music player; it's a versatile and hackable platform designed
-			to adapt to your unique preferences.<br></br> <strong>The Foundation: An Extensible Music Player.</strong>
+			to adapt to your unique preferences.<br> <strong>The Foundation: An Extensible Music Player.</strong>
 			M3P starts as a simple list of songs in a folder, providing the fundamental ability to play your music. However, what sets it apart is
 			its hackable configuration file, enabling you to transform the player into something far beyond the basics. <br></br>
 			<strong>Multiplatform Magic with Music Player Daemon (MPD)</strong>
