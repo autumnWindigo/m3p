@@ -55,7 +55,7 @@
 	</div>
 
 	<div class="additional-info">
-        <a href="/">About us</a>
+        <a href="/about">About us</a>
         <a href="/">Listening history</a> <!-- at some point we can import an array that adds on any song listened to in the session -->
         <a href="/">Back</a>
 	</div>
