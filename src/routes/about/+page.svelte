@@ -1,5 +1,5 @@
 <main id="about">
-    <h1>About</h1>
+    <h1>About us</h1>
 	<section id="our-story">
 		<h2>
 			<strong>Our Story</strong>
@@ -68,7 +68,7 @@
 
 	h2 {
 		font-weight: bold;
-		color: #333; /* Adjust color as needed */
+		color: #333; 
 	}
 
 	a {
@@ -78,6 +78,6 @@
 	}
 
 	a:hover {
-		color: #0056b3; /* Darker shade on hover */
+		color: #0056b3;
 	}
 </style>
