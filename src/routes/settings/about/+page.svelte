@@ -116,44 +116,48 @@
 
 <style>
 	#main {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	}
-	
+
 	#title {
-		margin-bottom: .3em;
-		
+	margin-bottom: .3em;
+	margin-left: .5em;
+	text-decoration-line: underline;
+	text-decoration-thickness: .12em;
+
 	}
 	#summary {
-		margin-bottom: 2em;
+	margin-bottom: 2em;
+	margin-left: 2em;
 	}
-	
+
 	#about {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
 	}
 
 	#our-story,
-		#customer-service {
-		margin-top: 20px;
+	#customer-service {
+	margin-top: 20px;
 	}
 
 	h2 {
-		font-weight: bold;
-		color: #333; 
+	font-weight: bold;
+	color: #333;
 	}
 
 	a {
-		color: #007bff; /* Bootstrap blue color, you can change it to your preferred color */
-		text-decoration: underline;
-		cursor: pointer;
+	color: #007bff; /* Bootstrap blue color, you can change it to your preferred color */
+	text-decoration: underline;
+	cursor: pointer;
 	}
 
 	a:hover {
-		color: #0056b3;
+	color: #0056b3;
 	}
 </style>
 

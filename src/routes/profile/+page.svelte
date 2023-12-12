@@ -46,7 +46,7 @@
 			{/each}
 		</ul>
 	</section>
-	<div>
+	<div class ="additional-info">
 		<a href="/">Back</a>
 	</div>
 </main>
@@ -57,6 +57,20 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 20px;
+	}
+
+	.additional-info {
+	position: absolute;
+	display: flex;
+	bottom: 150px;
+	}
+
+	p {
+	margin: 0 .75rem 0 0;
+	}
+
+	a {
+	margin: 1rem;
 	}
 
 	.profile-info {
