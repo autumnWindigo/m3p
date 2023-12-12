@@ -1,16 +1,40 @@
 <script>
     let paused = true;
     let volume = 50;
-
-    function handlePlayPause() { paused = !paused; }
-</script>
-
-<div id="playbar-background">
+    let audio = new Audio();
+  
+    export let selectedSong;
+    export let songs;
+  
+    function handlePlayPause() {
+      paused = !paused;
+  
+      if (!paused && selectedSong) {
+        const { audioData } = selectedSong;
+  
+        const audioBlob = new Blob([audioData], { type: "audio/mpeg" });
+        const audioUrl = URL.createObjectURL(audioBlob);
+  
+        audio.src = audioUrl;
+        audio.volume = volume / 100;
+        audio.play();
+  
+        console.log(`Playing: ${selectedSong.title}`);
+      } else {
+        audio.pause();
+      }
+    }
+  
+    function handleVolumeChange() {
+      audio.volume = volume / 100;
+    }
+  </script>
+  
+  <div id="playbar-background">
     <button id="play-pause" on:click={handlePlayPause}>{paused ? "\u23F5" : "\u23F8"}</button>
     <input id="seek-slider" type="range" value="0">
-    <input id="volume" type="range" bind:value={volume}>
-    
-</div>
+    <input id="volume" type="range" min="0" max="100" bind:value={volume} on:input={handleVolumeChange}>
+  </div>
 
 <style>
     #playbar-background {
