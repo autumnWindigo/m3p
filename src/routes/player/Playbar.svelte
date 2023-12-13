@@ -2,39 +2,76 @@
     let paused = true;
     let volume = 50;
     let audio = new Audio();
-  
+
     export let selectedSong;
-    export let songs;
-  
+
+    let playbackPosition = 0;
+    let duration = 0;
+
+    // Function to handle play/pause
     function handlePlayPause() {
-      paused = !paused;
-  
-      if (!paused && selectedSong) {
+        paused = !paused;
+
         const { audioData } = selectedSong;
-  
         const audioBlob = new Blob([audioData], { type: "audio/mpeg" });
         const audioUrl = URL.createObjectURL(audioBlob);
-  
+
         audio.src = audioUrl;
+        audio.currentTime = playbackPosition; // Set the playback position
         audio.volume = volume / 100;
-        audio.play();
-  
-        console.log(`Playing: ${selectedSong.title}`);
-      } else {
-        audio.pause();
-      }
+
+        // Event listener to update duration when metadata is loaded
+        audio.addEventListener("loadedmetadata", () => {
+            duration = audio.duration;
+        });
+
+        if (!paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
     }
-  
+
+    // Function to handle volume change
     function handleVolumeChange() {
-      audio.volume = volume / 100;
+        audio.volume = volume / 100;
     }
-  </script>
-  
-  <div id="playbar-background">
-    <button id="play-pause" on:click={handlePlayPause}>{paused ? "\u23F5" : "\u23F8"}</button>
-    <input id="seek-slider" type="range" value="0">
-    <input id="volume" type="range" min="0" max="100" bind:value={volume} on:input={handleVolumeChange}>
-  </div>
+
+    // Function to handle seek slider change
+    function handleSeekSliderChange(event) {
+        playbackPosition = event.target.value;
+        audio.currentTime = playbackPosition;
+    }
+
+    // Event listener to update playback position continuously
+    audio.addEventListener("timeupdate", () => {
+        if (!audio.paused) {
+            playbackPosition = audio.currentTime;
+        }
+    });
+
+</script>
+
+<div id="playbar-background">
+    <button id="play-pause" on:click={handlePlayPause}>
+        {paused ? "\u23F5" : "\u23F8"}
+    </button>
+    <input
+        id="seek-slider"
+        type="range"
+        bind:value={playbackPosition}
+        max={duration}
+        on:input={handleSeekSliderChange}
+    />
+    <input
+        id="volume"
+        type="range"
+        min="0"
+        max="100"
+        bind:value={volume}
+        on:input={handleVolumeChange}
+    />
+</div>
 
 <style>
     #playbar-background {
@@ -57,13 +94,12 @@
         width: 80%;
         height: 0.25rem;
         border-radius: 0.25rem;
-        background-color: #B7790B;
+        background-color: #b7790b;
         transition: 0.2s;
-        
     }
 
     #seek-slider:hover {
-        background-color: #FFB916;
+        background-color: #ffb916;
     }
 
     #seek-slider::-webkit-slider-thumb {
@@ -100,8 +136,8 @@
     #play-pause {
         appearance: none;
         border: none;
-        background-color: #1C2126;
-        color: #FFCF50;
+        background-color: #1c2126;
+        color: #ffcf50;
         border-radius: 3rem;
         margin: 0 1.5rem;
         scale: 1.25;
@@ -114,7 +150,7 @@
         height: 0.25rem;
         border-radius: 0.25rem;
         margin: 0 1rem;
-        background-color: #1C2126;
+        background-color: #1c2126;
     }
 
     #volume::-webkit-slider-thumb {
@@ -125,7 +161,7 @@
         background-color: ivory;
         border-radius: 0.5rem;
         border: "solid";
-        border-color: #1C2126;
+        border-color: #1c2126;
         border-width: 2px;
         transition: 0.1s;
     }
@@ -136,7 +172,7 @@
         background-color: ivory;
         border-radius: 0.5rem;
         border: "solid";
-        border-color: #1C2126;
+        border-color: #1c2126;
         transition: 0.1s;
     }
 
@@ -155,5 +191,4 @@
     #volume::-moz-range-progress {
         background-color: gold;
     }
-
 </style>
