@@ -1,11 +1,11 @@
 <script>
   import Playbar from "./Playbar.svelte";
   import { writable, get } from "svelte/store";
-  import { onMount } from "svelte";
 
   // Create a Svelte store for the songs array
   const songsStore = writable([]);
 
+  // Becomes "song", which is an object with this structure: {artist, title, album, audioData}
   let selectedSong = null;
 
   const handleFileSelect = async (event) => {
@@ -39,10 +39,6 @@
     selectedSong = song;
   }
 
-  // Use onMount to trigger the reactivity when songs change
-  onMount(() => {
-    $: console.log("Songs updated:", get(songsStore));
-  });
 </script>
 
 <div>
@@ -50,30 +46,32 @@
     <div id="main-menu">
       <h2>Main Menu</h2>
       <input type="file" webkitdirectory directory multiple on:change={handleFileSelect} />
-      <table>
-        <thead>
-          <tr>
-            <th>Artist</th>
-            <th>Song</th>
-            <th>Album</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each $songsStore as { artist, title, album, audioData }}
-          <tr on:click={() => playSong({ artist, title, album, audioData })}>
-            <td>{artist}</td>
-            <td>{title}</td>
-            <td>{album}</td>
-          </tr>
-          {/each}
-        </tbody>
-      </table>
+      <div id="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Artist</th>
+              <th>Song</th>
+              <th>Album</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#each $songsStore as { artist, title, album, audioData }}
+            <tr on:click={() => playSong({ artist, title, album, audioData })}>
+              <td>{artist}</td>
+              <td>{title}</td>
+              <td>{album}</td>
+            </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
     </div>
     <a id="back" href="/">
       back
     </a>
     {#if selectedSong}
-    <Playbar {selectedSong} {songsStore} />
+    <Playbar {selectedSong}/>
     {/if}
   </div>
 </div>
@@ -100,6 +98,11 @@
     #main-menu h2 {
         font-size: 1.5em;
         margin-bottom: 10px;
+    }
+
+    #table-container {
+        max-height: 60vh;
+        overflow-y: auto;
     }
 
     table {
