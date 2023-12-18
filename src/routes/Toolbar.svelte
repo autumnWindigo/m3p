@@ -33,6 +33,7 @@
     <a href="/profile" on:click={toggleToolbar}>profile</a>
     <a href="/tools" on:click={toggleToolbar}>tools</a>
     <a href="/settings" on:click={toggleToolbar}>settings</a>
+	<a href="/about" on:click={toggleToolbar}>about</a>
 </div>
 
 <style>
