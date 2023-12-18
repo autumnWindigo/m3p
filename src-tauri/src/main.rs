@@ -16,7 +16,7 @@ async fn main() {
         .invoke_handler(tauri::generate_handler![
             config::set_config_by_key,
             player::download_song,
-            player::update_library,
+            player::update_json,
             player::search_title,
             player::mpd_status,
             player::toggle_play,
