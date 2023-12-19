@@ -78,6 +78,7 @@
             Edit Bio
         {/if}
     </button>
+    <a href="/">back</a>
 </div>
 
 <style>
