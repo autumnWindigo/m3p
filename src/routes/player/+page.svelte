@@ -1,25 +1,26 @@
 <script>
-	import Playbar from "./Playbar.svelte";
-	import { writable, get } from "svelte/store";
+    import Playbar from "./Playbar.svelte";
+    import { writable, get } from "svelte/store";
 
-	// Create a Svelte store for the songs array
-	const songsStore = writable([]);
+    // Create a Svelte store for the songs array
+    const songsStore = writable([]);
 
-	// Becomes "song", which is an object with this structure: {artist, title, album, audioData}
-	let selectedSong = null;
+    // Becomes "song", which is an object with this structure: {artist, title, album, audioData}
+    let selectedSong = null;
 
-	/*
-	const updateFromJson = async () => {
-	try {
-	const response = await fetch(''); // Adjust the endpoint URL
-	const jsonData = await response.json();
+    /*
+    const updateFromJson = async () => {
+        try {
+            const response = await fetch(''); // This might be wrong either import
+			// update_json or link its path here
+            const jsonData = await response.json();
 
-	// Update the songs array in the store
-	songsStore.set(jsonData);
-	console.log("Songs updated from JSON:", jsonData);
-	} catch (error) {
-	console.error("Error updating songs from JSON:", error);
-	}
+            // Update the songs array in the store
+            songsStore.set(jsonData);
+            console.log("Songs updated from JSON:", jsonData);
+        } catch (error) {
+            console.error("Error updating songs from JSON:", error);
+	    }
 	};
 	*/
 
@@ -27,36 +28,37 @@
 	onMount(updateFromJson);
 
 	const handleFileSelect = async (event) => {
-	const newSongs = [];
+	    const newSongs = [];
 
-	for (const file of event.target.files) {
-	if (file.type.startsWith("audio/")) {
-	const arrayBuffer = await file.arrayBuffer();
-	const audioData = new Uint8Array(arrayBuffer);
-	// Extract artist name from the first song in the JSON data
-	//const artist = get(songsStore)[0]?.artist || "Unknown Artist";
-	newSongs.push({
-	title: file.name,
-	artist: "Unknown Artist",
-	album: "Unknown Album",
-	audioData,
-	});
-	}
+	    for (const file of event.target.files) {
+	        if (file.type.startsWith("audio/")) {
+	            const arrayBuffer = await file.arrayBuffer();
+	            const audioData = new Uint8Array(arrayBuffer);
+	            // Extract artist name from the first song in the JSON data
+	            
+				//const artist = get(songsStore)[0]?.artist || "Unknown Artist";
+	            newSongs.push({
+	                title: file.name,
+	                artist: "Unknown Artist",
+	                album: "Unknown Album",
+	                audioData,
+	            });
+	    }
 	}
 
 	// Update the songs array in the store
-	songsStore.set(newSongs);
-	console.log("Files processed:", newSongs);
+	    songsStore.set(newSongs);
+	    console.log("Files processed:", newSongs);
 	};
 
 	// Subscribe to changes in the songs store
 	$: {
-	const songs = get(songsStore);
-	console.log("Songs updated:", songs);
+	    const songs = get(songsStore);
+	    console.log("Songs updated:", songs);
 	}
 
 	function playSong(song) {
-	selectedSong = song;
+	    selectedSong = song;
 	}
 
 </script>

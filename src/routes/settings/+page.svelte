@@ -20,7 +20,6 @@
 	function updateBackgroundColor() {
 		const body = document.body;
 		if ($colorMode == 'dark') {
-			// later down the line the colors shouldn't be set manually like this, should be a function that picks the dark mode styling out of the global.css file
 			body.style.backgroundColor = '#333';
 		} else {
 			body.style.backgroundColor = 'ivory';
@@ -34,8 +33,6 @@
 </script>
 
 <main>
-	<h1>{userName}'s settings</h1>
-
     <div class="settings-container">
         <div class="toggle">
             <p>auto-play</p>
@@ -61,63 +58,72 @@
 </main>
 
 <style>
-    /* Add styling for the settings page */
-    main {
+	/* styling for the settings page */
+		main {
 		position: relative;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 		align-items: center;
-        padding: 20px;
-    }
+		height: 75vh;
+	}
 
 	.settings-container {
 		display: flex;
 		flex-direction: column;
-		align-items: end;
+		align-items: center;
+		padding: 20px;
+		border-radius: 8px;
+		margin-bottom: 20px;
+		background-color: transparent; /* Remove explicit background color */
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box-shadow for separation */
 	}
 
 	.additional-info {
-		position: absolute;
-		display: flex;
-		bottom: 0;
+	justify-content:center;
+	display: flex;
 	}
 
-    .toggle {
-        display: flex;
-        align-items: center;
-        margin-top: 20px;
-    }
+	p {
+	margin: 0 20px 0 0;
+	font-weight: bold;
+	color: #333;
+	}
 
-    p {
-        margin: 0 .75rem 0 0;
-    }
+	.toggle {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	}
 
-    a {
-        margin: 1rem;
-    }
+	a {
+	margin: 1rem;
+	color: #333;
+	text-decoration: none;
+	}
 
-    label {
-        position: relative;
-        width: 60px;
-        height: 34px;
-    }
+	label {
+	position: relative;
+	width: 60px;
+	height: 34px;
+	}
 
 	input {
 	display: none;
 	}
 
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        inset: 0;
-        background-color: #ccc;
-        border-radius: 34px;
-        transition: .4s;
-    }
+	.slider {
+	position: absolute;
+	cursor: pointer;
+	inset: 0;
+	background-color: #ccc;
+	border-radius: 34px;
+	transition: .4s;
+	}
 
-    input:checked + .slider {
-        background-color: #2196F3;
-    }
+	input:checked + .slider {
+	background-color: #2196F3;
+	}
 
 	.slider:before {
 	position: absolute;

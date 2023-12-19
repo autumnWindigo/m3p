@@ -1,111 +1,142 @@
 <!-- Profile.svelte -->
 <script>
-	import { createEventDispatcher } from 'svelte';
+    import { format } from 'date-fns';
+    import { onMount, onDestroy } from 'svelte';
 
-	let userName = "John Doe";
-	let userEmail = "john@example.com";
-	let favoriteSongs = ["Song 1", "Song 2", "Song 3"];
-	let newEmail = '';
-	let isEditingEmail = false;
+    let userName = "M3P Profile";
+    let dateCreated = new Date();
+    let bio = "Welcome to my music world! Proud customer of m3p";
+    let isEditMode = false;
 
-	const dispatch = createEventDispatcher();
+    function toggleEditMode() {
+        isEditMode = !isEditMode;
+    }
 
-	function toggleEditEmail() {
-		isEditingEmail = !isEditingEmail;
-		if (!isEditingEmail) {
-			// Save the new email when editing is done
-			userEmail = newEmail;
-			dispatch('emailChanged', newEmail);
-		}
-	}
+    const listeningStatistics = {
+        labels: ['Rock', 'Pop', 'Electronic', 'Jazz', 'Hip Hop'],
+        data: [20, 15, 10, 5, 50] // Example data, replace with actual statistics
+    };
 
-	function submitNewEmail() {
-		toggleEditEmail();
-	}
+    let chart;
+
+    onMount(() => {
+        // Initialize the chart
+        const ctx = document.querySelector('canvas').getContext('2d');
+        chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: listeningStatistics.labels,
+                datasets: [{
+                    label: 'Listening Statistics',
+                    data: listeningStatistics.data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    });
+
+    onDestroy(() => {
+        // Cleanup the chart when the component is unmounted
+        chart.destroy();
+    });
 </script>
 
-<main class ="profile-page">
-	<section class="profile-info">
-		<h1>{userName}'s Profile</h1>
-		<p>
-			Email: {#if isEditingEmail}
-				<input bind:value={newEmail} />
-				<button on:click={submitNewEmail}>Submit</button>
-			{:else}
-				{userEmail}
-				<button on:click={toggleEditEmail}>Edit Email</button>
-			{/if}
-		</p>
-	</section>
+<div class="profile-container">
+    <h1>User Profile</h1>
 
-	<section class="favorite-songs">
-		<h2>Favorite Songs</h2>
-		<ul>
-			{#each favoriteSongs as song (song)}
-				<li>{song}</li>
-			{/each}
-		</ul>
-	</section>
-	<div class ="additional-info">
-		<a href="/">Back</a>
-	</div>
-</main>
+    <div class="user-info">
+        <div class="profile-details">
+            <p><strong>Name:</strong> {userName}</p>
+            <p><strong>Date Created:</strong> {format(dateCreated, 'MMMM d, yyyy')}</p>
+            <p><strong>Bio:</strong> {bio}</p>
+        </div>
+    </div>
+
+    {#if isEditMode}
+        <!-- Edit mode -->
+        <div class="edit-mode">
+            <label for="newBio">Update Bio:</label>
+            <textarea bind:value={bio} id="newBio"></textarea>
+        </div>
+    {:else}
+        <!-- View mode -->
+        <div class="chart-container">
+            <canvas bind:this={chart} />
+        </div>
+    {/if}
+
+    <button on:click={toggleEditMode}>
+        {#if isEditMode}
+            Save Bio
+        {:else}
+            Edit Bio
+        {/if}
+    </button>
+</div>
 
 <style>
-	main.profile-page {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 20px;
-	}
+    /* styling for the profile page */
+    /*
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 0;
+    }
+    */
+    .profile-container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-	.additional-info {
-	position: absolute;
-	display: flex;
-	bottom: 150px;
-	}
+    h1 {
+        color: #333;
+    }
 
-	p {
-	margin: 0 .75rem 0 0;
-	}
 
-	a {
-	margin: 1rem;
-	}
+    .profile-details {
+        text-align: left;
+    }
 
-	.profile-info {
-	margin-bottom: 20px;
-	text-align: center;
-	}
+    .edit-mode {
+        margin-bottom: 20px;
+    }
 
-	input {
-	margin-right: 10px;
-	padding: 8px;
-	font-size: 16px;
-	}
+    textarea {
+        width: 100%;
+        height: 100px;
+        resize: vertical;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 
-	button {
-	background-color: #2196F3;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	padding: 8px;
-	cursor: pointer;
-	font-size: 16px;
-	}
+    .chart-container {
+        width: 100%;
+        margin: 20px 0;
+    }
 
-	.favorite-songs {
-	text-align: center;
-	margin-top: 20px;
-	margin-bottom: 70px;
-	}
+    button {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
 
-	ul {
-	list-style-type: none;
-	padding: 0;
-	}
-
-	li {
-	margin-bottom: 8px;
-	}
+    button:hover {
+        background-color: #45a049;
+    }
 </style>

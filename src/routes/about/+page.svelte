@@ -106,20 +106,21 @@
 		<h2>
 			<strong>Customer Service and Support</strong>
 		</h2>
-		<p>
-			For inquiries, please <a href="https://directory.sju.edu/george-j-grevera">contact us</a>.
-		</p>
 	</section>
+	<a href="https://directory.sju.edu/george-j-grevera">contact us</a>
     <a href="/">back</a>
 	
 </main>
 
 <style>
+/*
 	#main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	}
+*/
+
 
 	#title {
 	margin-bottom: .3em;
@@ -150,14 +151,5 @@
 	color: #333;
 	}
 
-	a {
-	color: #007bff; /* Bootstrap blue color, you can change it to your preferred color */
-	text-decoration: underline;
-	cursor: pointer;
-	}
-
-	a:hover {
-	color: #0056b3;
-	}
 </style>
 

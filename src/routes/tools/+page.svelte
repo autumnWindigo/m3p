@@ -31,10 +31,44 @@
 </div>
 
 <style>
-    #tools {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  #tools {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+    main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  #tools {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  a {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #black; 
+    text-decoration: none;
+    cursor: pointer;
+  }
 </style>
 </main>
