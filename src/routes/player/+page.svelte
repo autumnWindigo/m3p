@@ -1,43 +1,63 @@
 <script>
-  import Playbar from "./Playbar.svelte";
-  import { writable, get } from "svelte/store";
+	import Playbar from "./Playbar.svelte";
+	import { writable, get } from "svelte/store";
 
-  // Create a Svelte store for the songs array
-  const songsStore = writable([]);
+	// Create a Svelte store for the songs array
+	const songsStore = writable([]);
 
-  // Becomes "song", which is an object with this structure: {artist, title, album, audioData}
-  let selectedSong = null;
+	// Becomes "song", which is an object with this structure: {artist, title, album, audioData}
+	let selectedSong = null;
 
-  const handleFileSelect = async (event) => {
-    const newSongs = [];
+	/*
+	const updateFromJson = async () => {
+	try {
+	const response = await fetch(''); // Adjust the endpoint URL
+	const jsonData = await response.json();
 
-    for (const file of event.target.files) {
-      if (file.type.startsWith("audio/")) {
-        const arrayBuffer = await file.arrayBuffer();
-        const audioData = new Uint8Array(arrayBuffer);
-        newSongs.push({
-          title: file.name,
-          artist: "Unknown Artist",
-          album: "Unknown Album",
-          audioData,
-        });
-      }
-    }
+	// Update the songs array in the store
+	songsStore.set(jsonData);
+	console.log("Songs updated from JSON:", jsonData);
+	} catch (error) {
+	console.error("Error updating songs from JSON:", error);
+	}
+	};
+	*/
 
-    // Update the songs array in the store
-    songsStore.set(newSongs);
-    console.log("Files processed:", newSongs);
-  };
+	// Initial update when the component is mounted
+	onMount(updateFromJson);
 
-  // Subscribe to changes in the songs store
-  $: {
-    const songs = get(songsStore);
-    console.log("Songs updated:", songs);
-  }
+	const handleFileSelect = async (event) => {
+	const newSongs = [];
 
-  function playSong(song) {
-    selectedSong = song;
-  }
+	for (const file of event.target.files) {
+	if (file.type.startsWith("audio/")) {
+	const arrayBuffer = await file.arrayBuffer();
+	const audioData = new Uint8Array(arrayBuffer);
+	// Extract artist name from the first song in the JSON data
+	//const artist = get(songsStore)[0]?.artist || "Unknown Artist";
+	newSongs.push({
+	title: file.name,
+	artist: "Unknown Artist",
+	album: "Unknown Album",
+	audioData,
+	});
+	}
+	}
+
+	// Update the songs array in the store
+	songsStore.set(newSongs);
+	console.log("Files processed:", newSongs);
+	};
+
+	// Subscribe to changes in the songs store
+	$: {
+	const songs = get(songsStore);
+	console.log("Songs updated:", songs);
+	}
+
+	function playSong(song) {
+	selectedSong = song;
+	}
 
 </script>
 
