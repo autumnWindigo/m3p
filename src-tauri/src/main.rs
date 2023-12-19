@@ -20,6 +20,11 @@ async fn main() {
             player::search_title,
             player::mpd_status,
             player::toggle_play,
+            player::shuffle,
+            player::changeVolume,
+            player::time_change,
+            player::skip,
+            player::time_return
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -81,3 +81,55 @@ pub async fn download_song(link: String) -> Value {
 
     output.unwrap()
 }
+
+//Changes volume
+#[tauri::command]
+pub async fn changeVolume(newVolume: u8) -> null{
+    let mut client = MpdClient::new();
+    client.connect("127.0.0.1:6600").await.expect("cannot connect to client");
+    client.setvol(newVolume).await?;
+}
+
+//Changes time
+#[tauri::command]
+pub async fn time_change(newTime: i32) -> null{
+    let mut client = MpdClient::new();
+    client.connect("127.0.0.1:6600").await.expect("cannot connect to client");
+    client.seekcur(new_time).await?;
+
+}
+
+//Shuffles playlist
+#[tauri::command]
+pub async fn shuffle() -> null{
+    let mut client = MpdClient::new();
+    client.connect("127.0.0.1:6600").await.expect("cannot connect to client");
+    client.shuffle().await?;
+}
+
+//Skips song
+#[tauri::command]
+pub async fn skip() -> null{
+    let mut client = MpdClient::new();
+    client.connect("127.0.0.1:6600").await.expect("cannot connect to client");
+    client.next().await?;
+}
+
+//Returns current time
+#[tauri::command]
+pub async fn time_return() -> i32 {
+    let mut client = MpdClient::new();
+   client.connect("127.0.0.1:6600").await.expect("cannot connect to client");
+   let status = client.status()?;
+   let state = status.state;
+
+   // Check if the MPD server is in the "play" state
+   if state == State::Play {
+       // Get the elapsed time of the current song
+       if let Some(elapsed_time) = status.elapsed {
+           // Close the connection
+           client.close().await?;
+           return elapsed_time;
+       }
+    }
+}
