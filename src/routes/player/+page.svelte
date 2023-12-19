@@ -1,14 +1,14 @@
 <script>
-	import Playbar from "./Playbar.svelte";
-	import { writable, get } from "svelte/store";
+  import Playbar from "./Playbar.svelte";
+  import { writable, get } from "svelte/store";
 
-	// Create a Svelte store for the songs array
-	const songsStore = writable([]);
+  // Create a Svelte store for the songs array
+  const songsStore = writable([]);
 
-	// Becomes "song", which is an object with this structure: {artist, title, album, audioData}
-	let selectedSong = null;
+  // Becomes "song", which is an object with this structure: {artist, title, album, audioData}
+  let selectedSong = null;
 
-	/*
+  /*
 	const updateFromJson = async () => {
 	try {
 	const response = await fetch(''); // Adjust the endpoint URL
@@ -23,49 +23,51 @@
 	};
 	*/
 
-	// Initial update when the component is mounted
-	onMount(updateFromJson);
+  const handleFileSelect = async (event) => {
+    const newSongs = [];
 
-	const handleFileSelect = async (event) => {
-	const newSongs = [];
+    for (const file of event.target.files) {
+      if (file.type.startsWith("audio/")) {
+        const arrayBuffer = await file.arrayBuffer();
+        const audioData = new Uint8Array(arrayBuffer);
+        // Extract artist name from the first song in the JSON data
+        //const artist = get(songsStore)[0]?.artist || "Unknown Artist";
+        newSongs.push({
+          title: file.name,
+          artist: "Unknown Artist",
+          album: "Unknown Album",
+          audioData,
+        });
+      }
+    }
 
-	for (const file of event.target.files) {
-	if (file.type.startsWith("audio/")) {
-	const arrayBuffer = await file.arrayBuffer();
-	const audioData = new Uint8Array(arrayBuffer);
-	// Extract artist name from the first song in the JSON data
-	//const artist = get(songsStore)[0]?.artist || "Unknown Artist";
-	newSongs.push({
-	title: file.name,
-	artist: "Unknown Artist",
-	album: "Unknown Album",
-	audioData,
-	});
-	}
-	}
+    // Update the songs array in the store
+    songsStore.set(newSongs);
+    console.log("Files processed:", newSongs);
+  };
 
-	// Update the songs array in the store
-	songsStore.set(newSongs);
-	console.log("Files processed:", newSongs);
-	};
+  // Subscribe to changes in the songs store
+  $: {
+    const songs = get(songsStore);
+    console.log("Songs updated:", songs);
+  }
 
-	// Subscribe to changes in the songs store
-	$: {
-	const songs = get(songsStore);
-	console.log("Songs updated:", songs);
-	}
-
-	function playSong(song) {
-	selectedSong = song;
-	}
-
+  function playSong(song) {
+    selectedSong = song;
+  }
 </script>
 
 <div>
   <div id="player-background">
     <div id="main-menu">
       <h2>Main Menu</h2>
-      <input type="file" webkitdirectory directory multiple on:change={handleFileSelect} />
+      <input
+        type="file"
+        webkitdirectory
+        directory
+        multiple
+        on:change={handleFileSelect}
+      />
       <div id="table-container">
         <table>
           <thead>
@@ -77,77 +79,78 @@
           </thead>
           <tbody>
             {#each $songsStore as { artist, title, album, audioData }}
-            <tr on:click={() => playSong({ artist, title, album, audioData })}>
-              <td>{artist}</td>
-              <td>{title}</td>
-              <td>{album}</td>
-            </tr>
+              <tr
+                on:click={() => playSong({ artist, title, album, audioData })}
+              >
+                <td>{artist}</td>
+                <td>{title}</td>
+                <td>{album}</td>
+              </tr>
             {/each}
           </tbody>
         </table>
       </div>
     </div>
-    <a id="back" href="/">
-      back
-    </a>
+    <a id="back" href="/"> back </a>
     {#if selectedSong}
-    <Playbar {selectedSong}/>
+      <Playbar {selectedSong} />
     {/if}
   </div>
 </div>
 
 <style>
-    #player-background {
-        height: 90vh;
-        width: 100vw;
-        background-color: #1C2126;
-        border-radius: 3vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-    }
+  #player-background {
+    height: 90vh;
+    width: 100vw;
+    background-color: #1c2126;
+    border-radius: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
 
-    #main-menu {
-        padding: 20px;
-        color: white;
-        text-align: center;
-        width: 90%;
-    }
+  #main-menu {
+    padding: 20px;
+    color: white;
+    text-align: center;
+    width: 90%;
+  }
 
-    #main-menu h2 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-    }
+  #main-menu h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
 
-    #table-container {
-        max-height: 60vh;
-        overflow-y: auto;
-    }
+  #table-container {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
 
-    th, td {
-        border: 1px solid #34495e;
-        padding: 10px;
-        text-align: left;
-        color: white;
-    }
+  th,
+  td {
+    border: 1px solid #34495e;
+    padding: 10px;
+    text-align: left;
+    color: white;
+  }
 
-    th {
-        background-color: #2c3e50;
-    }
+  th {
+    background-color: #2c3e50;
+  }
 
-    tr:hover {
-        background-color: #2c3e50;
-        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    }
+  tr:hover {
+    background-color: #2c3e50;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  }
 
-    #back {
-        background-color: ivory;
-    }
+  #back {
+    background-color: ivory;
+  }
 </style>
